@@ -9,5 +9,10 @@
         <vm:Page1ViewModel/>
     </Design.DataContext>-->
     
-    <TextBlock Text="{Binding Path=Text}"/>
+    <StackPanel>
+        <Button Content="Edit"
+                Command="{Binding Path=EditCommand}"/>
+        <TextBox Text="{Binding Path=Text}"
+                 IsEnabled="{Binding Path=IsEnabled}"/>
+    </StackPanel>
 </v:Page>

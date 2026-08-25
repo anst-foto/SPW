@@ -1,48 +1,73 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:SPW.ViewModels"
-        
+
         x:Class="SPW.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        
+
         Icon="/Assets/avalonia-logo.ico"
         Title="SPW">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
     <Window.Resources>
         <DataTemplate x:Key="TemplateItemOfPages"
                       DataType="vm:ItemOfPages">
-            <TextBlock Text="{Binding Path=Title}"/>
+            <TextBlock Text="{Binding Path=Title}" />
         </DataTemplate>
-        
+
         <ItemsPanelTemplate x:Key="PanelTemplate">
-            <StackPanel Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal" />
         </ItemsPanelTemplate>
     </Window.Resources>
-    
-    <SplitView PanePlacement="Top"
+
+    <Window.Styles>
+        <Style Selector="ToggleButton PathIcon.open">
+            <Setter Property="IsVisible" Value="True" />
+            
+            <Style Selector="^:checked PathIcon.open">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+        </Style>
+        
+        <Style Selector="ToggleButton PathIcon.close">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="ToggleButton:checked PathIcon.close">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+    </Window.Styles>
+
+    <SplitView x:Name="SplitView"
+               PanePlacement="Top"
                DisplayMode="CompactInline"
                OpenPaneLength="200"
-               CompactPaneLength="50"
-               IsPaneOpen="{Binding Path=IsPaneOpen}">
+               CompactPaneLength="50">
         <SplitView.Pane>
             <StackPanel Orientation="Horizontal">
-                <Button Content="☰" Command="{Binding Path=TogglePaneCommand}"
-                        Width="48" HorizontalAlignment="Left" />
-                
+                <!--<Button Content="☰" Command="{Binding Path=TogglePaneCommand}"
+                        Width="48" HorizontalAlignment="Left" />-->
+                <ToggleButton IsChecked="{Binding ElementName=SplitView, Path=IsPaneOpen}">
+                    <Panel>
+                        <PathIcon Classes="open"
+                                  Data="{StaticResource ResourceKey=open}" />
+                        <PathIcon Classes="close"
+                                  Data="{StaticResource ResourceKey=close}" />
+                    </Panel>
+                </ToggleButton>
+
                 <ListBox ItemsSource="{Binding Path=Pages}"
                          ItemsPanel="{StaticResource ResourceKey=PanelTemplate}"
                          ItemTemplate="{StaticResource ResourceKey=TemplateItemOfPages}"
                          SelectionMode="Single"
-                         SelectedItem="{Binding Path=SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                         SelectedItem="{Binding Path=SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </SplitView.Pane>
-        
+
         <SplitView.Content>
-            <ContentControl Content="{Binding Path=SelectedPage.View}"/>
+            <ContentControl Content="{Binding Path=SelectedPage.View}" />
         </SplitView.Content>
     </SplitView>
 </Window>

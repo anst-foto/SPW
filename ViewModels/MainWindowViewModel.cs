@@ -23,15 +23,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [Reactive] private ItemOfPages _selectedPage;
 
-    [Reactive] private bool _isPaneOpen;
-
     public MainWindowViewModel()
     {
         SelectedPage = Pages[0];
     }
-    
-    [ReactiveCommand]
-    private void TogglePane() => IsPaneOpen = !IsPaneOpen;
 }
 
 public class ItemOfPages

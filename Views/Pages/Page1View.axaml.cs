@@ -1,9 +1,8 @@
-using Avalonia.Controls;
 using SPW.ViewModels;
 
 namespace SPW.Views;
 
-public partial class Page1View : UserControl
+public partial class Page1View : Page
 {
     public Page1View()
     {

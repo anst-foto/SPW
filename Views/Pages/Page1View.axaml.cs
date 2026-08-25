@@ -9,6 +9,6 @@ public partial class Page1View : UserControl
     {
         InitializeComponent();
         
-        DataContext = new Page1ViewModel();
+        DataContext = new Page1ViewModel("Hello");
     }
 }

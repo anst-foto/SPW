@@ -4,9 +4,9 @@
              
              x:Class="SPW.Views.Page2View"
              x:DataType="vm:Page2ViewModel">
-    <Design.DataContext>
+    <!--<Design.DataContext>
         <vm:Page2ViewModel/>
-    </Design.DataContext>
+    </Design.DataContext>-->
     
     <TextBlock Text="{Binding Path=Text}"/>
 </UserControl>

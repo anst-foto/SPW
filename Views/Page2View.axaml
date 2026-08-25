@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SPW.ViewModels"
+             
+             x:Class="SPW.Views.Page2View"
+             x:DataType="vm:Page2ViewModel">
+    <Design.DataContext>
+        <vm:Page2ViewModel/>
+    </Design.DataContext>
+    
+    <TextBlock Text="{Binding Path=Text}"/>
+</UserControl>

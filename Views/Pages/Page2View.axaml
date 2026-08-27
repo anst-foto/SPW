@@ -1,13 +1,68 @@
 <v:Page xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:SPW.ViewModels"
-             xmlns:v="using:SPW.Views"
-             
-             x:Class="SPW.Views.Page2View"
-             x:DataType="vm:Page2ViewModel">
-    <!--<Design.DataContext>
-        <vm:Page2ViewModel/>
-    </Design.DataContext>-->
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SPW.ViewModels"
+        xmlns:v="using:SPW.Views"
+        xmlns:m="using:SPW.Models"
+
+        x:Class="SPW.Views.Page2View"
+        x:DataType="vm:Page2ViewModel">
     
-    <TextBlock Text="{Binding Path=Text}"/>
+    <v:Page.Resources>
+        <DataTemplate x:Key="Template_TestData"
+        DataType="{x:Type TypeName=m:TestDataVm}">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="#{0}: {1}">
+                        <Binding Path="ShortId" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding Path="Name" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+    </v:Page.Resources>
+
+    <Grid ColumnDefinitions="*, 3*">
+        <ListBox ItemsSource="{Binding Path=Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource ResourceKey=Template_TestData}"
+                 SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 SelectionMode="Single"
+                 Grid.Column="0" />
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Column="1">
+            <Grid ColumnDefinitions="*, 2*">
+                <Label Target="{Binding ElementName=Input_Id}"
+                       Content="ID"
+                       Grid.Column="0" />
+                <TextBox x:Name="Input_Id"
+                         Text="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Column="1" />
+            </Grid>
+            <Grid ColumnDefinitions="*, 2*">
+                <Label Target="{Binding ElementName=Input_Name}"
+                       Content="Name"
+                       Grid.Column="0" />
+                <TextBox x:Name="Input_Name"
+                         Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Column="1" />
+            </Grid>
+            <Grid ColumnDefinitions="*, 2*">
+                <Label Target="{Binding ElementName=Input_Time}"
+                       Content="Time"
+                       Grid.Column="0" />
+                <TextBox x:Name="Input_Time"
+                         Text="{Binding Path=Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Column="1" />
+            </Grid>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Save"
+                        Command="{Binding Path=SaveCommand}"/>
+                <Button Content="Delete"
+                        Command="{Binding Path=DeleteCommand}"/>
+                <Button Content="Clear"
+                        Command="{Binding Path=ClearCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </v:Page>

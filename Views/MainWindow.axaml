@@ -47,8 +47,6 @@
                CompactPaneLength="50">
         <SplitView.Pane>
             <StackPanel Orientation="Horizontal">
-                <!--<Button Content="☰" Command="{Binding Path=TogglePaneCommand}"
-                        Width="48" HorizontalAlignment="Left" />-->
                 <ToggleButton IsChecked="{Binding ElementName=SplitView, Path=IsPaneOpen}">
                     <Panel>
                         <PathIcon Classes="open"

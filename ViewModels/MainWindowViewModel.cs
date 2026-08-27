@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using ReactiveUI.SourceGenerators;
 using SPW.Views;
@@ -7,7 +8,7 @@ namespace SPW.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public ObservableCollection<ItemOfPages> Pages { get; } = 
+    public ImmutableList<ItemOfPages> Pages { get; } = 
     [
         new()
         {
@@ -18,7 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Title = "Page 2",
             View = new Page2View()
-        },
+        }
     ];
 
     [Reactive] private ItemOfPages _selectedPage;
